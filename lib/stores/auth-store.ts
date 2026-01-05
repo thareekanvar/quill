@@ -29,6 +29,8 @@ export const useAuthStore = create<AuthState>()(
           if (typeof window !== 'undefined') {
             try {
               sessionStorage.setItem(PASSWORD_KEY, password);
+              // Set cookie for middleware
+              document.cookie = `postadmin-auth=true; path=/; max-age=86400; SameSite=Lax`;
             } catch {
               // Ignore
             }
@@ -44,6 +46,8 @@ export const useAuthStore = create<AuthState>()(
           if (typeof window !== 'undefined') {
             try {
               sessionStorage.removeItem(PASSWORD_KEY);
+              // Remove cookie for proxy
+              document.cookie = `postadmin-auth=; path=/; max-age=0; SameSite=Lax`;
             } catch {
               // Ignore
             }
@@ -96,6 +100,12 @@ export const useAuthStore = create<AuthState>()(
             const storedPassword = sessionStorage.getItem(PASSWORD_KEY);
             if (storedPassword && state.connectionId) {
               state.password = storedPassword;
+            }
+            // Sync cookie with auth state after hydration
+            if (state.isAuthenticated && state.connectionId) {
+              document.cookie = `postadmin-auth=true; path=/; max-age=86400; SameSite=Lax`;
+            } else {
+              document.cookie = `postadmin-auth=; path=/; max-age=0; SameSite=Lax`;
             }
           } catch {
             // Ignore
