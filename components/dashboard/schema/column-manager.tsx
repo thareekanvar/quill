@@ -29,6 +29,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DEFAULT_SCHEMA } from "@/lib/constants";
+import { TableSkeleton } from "./table-skeleton";
 
 interface ColumnManagerProps {
   selectedTable: { tableName: string; schemaName: string } | null;
@@ -88,7 +89,7 @@ export function ColumnManager({ selectedTable, onTableSelect }: ColumnManagerPro
   const tableName = selectedTable?.tableName;
   const schemaName = selectedTable?.schemaName || DEFAULT_SCHEMA;
 
-  const { data: columnsData } = useTableColumnsForSchema(
+  const { data: columnsData, isLoading: isLoadingColumns } = useTableColumnsForSchema(
     tableName,
     schemaName
   );
@@ -246,7 +247,27 @@ export function ColumnManager({ selectedTable, onTableSelect }: ColumnManagerPro
           )}
         </div>
 
-        {selectedTable && columns.length > 0 && (
+        {selectedTable && isLoadingColumns && (
+          <TableSkeleton
+            headers={[
+              t.schema.columnName,
+              t.schema.columnType,
+              t.schema.nullable,
+              t.schema.defaultValue,
+              t.common.actions,
+            ]}
+            columnConfigs={[
+              { width: "w-32" },
+              { width: "w-24" },
+              { width: "w-12" },
+              { width: "w-20" },
+              {},
+            ]}
+            hasStickyActions={true}
+          />
+        )}
+
+        {selectedTable && !isLoadingColumns && columns.length > 0 && (
           <div className="border rounded-lg">
             <Table>
               <TableHeader>
@@ -292,7 +313,7 @@ export function ColumnManager({ selectedTable, onTableSelect }: ColumnManagerPro
           </div>
         )}
 
-        {selectedTable && columns.length === 0 && (
+        {selectedTable && !isLoadingColumns && columns.length === 0 && (
           <p className="text-muted-foreground text-center py-8">
             {t.schema.noColumnsFound}
           </p>

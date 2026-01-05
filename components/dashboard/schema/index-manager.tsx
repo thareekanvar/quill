@@ -29,6 +29,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DEFAULT_SCHEMA } from "@/lib/constants";
+import { TableSkeleton } from "./table-skeleton";
 
 interface IndexManagerProps {
   selectedTable: { tableName: string; schemaName: string } | null;
@@ -57,7 +58,7 @@ export function IndexManager({ selectedTable, onTableSelect }: IndexManagerProps
   const tableName = selectedTable?.tableName;
   const schemaName = selectedTable?.schemaName || DEFAULT_SCHEMA;
 
-  const { data: indexesData } = useTableIndexes(tableName, schemaName);
+  const { data: indexesData, isLoading: isLoadingIndexes } = useTableIndexes(tableName, schemaName);
   const indexes = indexesData?.indexes || [];
 
   // Get columns for the selected table
@@ -164,7 +165,26 @@ export function IndexManager({ selectedTable, onTableSelect }: IndexManagerProps
           )}
         </div>
 
-        {selectedTable && indexes.length > 0 && (
+        {selectedTable && isLoadingIndexes && (
+          <TableSkeleton
+            headers={[
+              t.schema.indexName,
+              t.schema.columns,
+              t.schema.unique,
+              t.schema.primary,
+              t.common.actions,
+            ]}
+            columnConfigs={[
+              { width: "w-32" },
+              { width: "w-40" },
+              { width: "w-12" },
+              { width: "w-12" },
+              {},
+            ]}
+          />
+        )}
+
+        {selectedTable && !isLoadingIndexes && indexes.length > 0 && (
           <div className="border rounded-lg">
             <Table>
               <TableHeader>
@@ -202,7 +222,7 @@ export function IndexManager({ selectedTable, onTableSelect }: IndexManagerProps
           </div>
         )}
 
-        {selectedTable && indexes.length === 0 && (
+        {selectedTable && !isLoadingIndexes && indexes.length === 0 && (
           <p className="text-muted-foreground text-center py-8">
             {t.schema.noIndexesFound}
           </p>

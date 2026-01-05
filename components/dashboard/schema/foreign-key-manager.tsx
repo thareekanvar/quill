@@ -27,6 +27,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { DEFAULT_SCHEMA } from "@/lib/constants";
+import { TableSkeleton } from "./table-skeleton";
 
 interface ForeignKeyManagerProps {
   selectedTable: { tableName: string; schemaName: string } | null;
@@ -58,7 +59,7 @@ export function ForeignKeyManager({ selectedTable, onTableSelect }: ForeignKeyMa
   const tableName = selectedTable?.tableName;
   const schemaName = selectedTable?.schemaName || DEFAULT_SCHEMA;
 
-  const { data: foreignKeysData } = useTableForeignKeys(tableName, schemaName);
+  const { data: foreignKeysData, isLoading: isLoadingForeignKeys } = useTableForeignKeys(tableName, schemaName);
   const foreignKeys = foreignKeysData?.foreignKeys || [];
 
   // Get columns for the selected table
@@ -178,7 +179,26 @@ export function ForeignKeyManager({ selectedTable, onTableSelect }: ForeignKeyMa
           )}
         </div>
 
-        {selectedTable && foreignKeys.length > 0 && (
+        {selectedTable && isLoadingForeignKeys && (
+          <TableSkeleton
+            headers={[
+              t.schema.constraintName,
+              t.schema.columnName,
+              t.schema.references,
+              t.schema.onDelete,
+              t.common.actions,
+            ]}
+            columnConfigs={[
+              { width: "w-32" },
+              { width: "w-24" },
+              { width: "w-48" },
+              { width: "w-20" },
+              {},
+            ]}
+          />
+        )}
+
+        {selectedTable && !isLoadingForeignKeys && foreignKeys.length > 0 && (
           <div className="border rounded-lg">
             <Table>
               <TableHeader>
@@ -216,7 +236,7 @@ export function ForeignKeyManager({ selectedTable, onTableSelect }: ForeignKeyMa
           </div>
         )}
 
-        {selectedTable && foreignKeys.length === 0 && (
+        {selectedTable && !isLoadingForeignKeys && foreignKeys.length === 0 && (
           <p className="text-muted-foreground text-center py-8">
             {t.schema.noForeignKeysFound}
           </p>
