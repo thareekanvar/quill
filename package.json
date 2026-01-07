@@ -7,7 +7,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "preview": "pnpm pages:build && wrangler pages dev",
+    "deploy": "pnpm pages:build && wrangler pages deploy"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.3",
@@ -55,6 +58,8 @@
     "zustand": "^5.0.9"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.15.0",
+    "@netlify/plugin-nextjs": "^4.45.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -63,7 +68,8 @@
     "eslint-config-next": "16.1.1",
     "shadcn": "^3.6.2",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^3.0.0"
   },
   "pnpm": {
     "overrides": {

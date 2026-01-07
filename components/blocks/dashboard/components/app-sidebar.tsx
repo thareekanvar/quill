@@ -176,7 +176,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     },
     {
       title: t.sidebar.getHelp,
-      url: "#",
+      url: "https://github.com/thareekanvar/quill",
       icon: Question,
     },
     {

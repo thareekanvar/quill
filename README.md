@@ -31,6 +31,22 @@ Built with [Next.js](https://nextjs.org), React, and TypeScript.
 
 ## 🚀 Getting Started
 
+### Deploy
+
+Deploy this project to your favorite platform with one click:
+
+<div align="center">
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/thareekanvar/quill)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/thareekanvar/quill)
+[![Deploy to Cloudflare Pages](https://deploy.workers.cloudflare.com/button)](https://dash.cloudflare.com/?to=/:account/pages/new/create)
+
+</div>
+
+**Note:** 
+- **Netlify**: Configuration is handled automatically via `netlify.toml`. Make sure to set your environment variables in the Netlify dashboard.
+- **Cloudflare Pages**: After connecting your repository, set the build command to `pnpm pages:build` and output directory to `.vercel/output/static`. Also configure your environment variables in the Cloudflare dashboard.
+
 ### Prerequisites
 
 - Node.js 18+
@@ -43,7 +59,7 @@ Built with [Next.js](https://nextjs.org), React, and TypeScript.
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/thareekanvar/quill.git
    cd postadmin
    ```
 

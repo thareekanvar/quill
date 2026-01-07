@@ -39,7 +39,11 @@ export function NavSecondary({
                     <span>{item.title}</span>
                   </>
                 ) : (
-                  <a href={item.url}>
+                  <a 
+                    href={item.url}
+                    target={item.url.startsWith('http') ? '_blank' : undefined}
+                    rel={item.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  >
                     <item.icon className="size-5" />
                     <span>{item.title}</span>
                   </a>
