@@ -366,7 +366,7 @@ export function ConnectionsTab() {
               {t.common.cancel}
             </Button>
             <Button onClick={handleExport} disabled={!exportPassword || isExporting}>
-              {isExporting ? t.sidebar.exporting : t.sidebar.export}
+              {isExporting ? t.sidebar.exporting : t.sidebar["export"]}
             </Button>
           </DialogFooter>
         </DialogContent>

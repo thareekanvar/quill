@@ -98,13 +98,27 @@ export const useAuthStore = create<AuthState>()(
         if (state && typeof window !== 'undefined') {
           try {
             const storedPassword = sessionStorage.getItem(PASSWORD_KEY);
-            if (storedPassword && state.connectionId) {
-              state.password = storedPassword;
+            // Restore password if it exists and user is authenticated
+            if (storedPassword && state.isAuthenticated && state.connectionId) {
+              // Use setPassword to properly update the state reactively
+              state.setPassword(storedPassword);
             }
-            // Sync cookie with auth state after hydration
-            if (state.isAuthenticated && state.connectionId) {
+            
+            // If authenticated but missing password or connectionId, clear invalid auth state
+            if (state.isAuthenticated && (!storedPassword || !state.connectionId)) {
+              // Clear invalid auth state directly (don't call async logout during hydration)
+              sessionStorage.removeItem(PASSWORD_KEY);
+              document.cookie = `postadmin-auth=; path=/; max-age=0; SameSite=Lax`;
+              // Update state properties directly during hydration
+              state.isAuthenticated = false;
+              state.connectionId = null;
+              state.password = null;
+              state.error = null;
+            } else if (state.isAuthenticated && state.connectionId && storedPassword) {
+              // Sync cookie with auth state after hydration
               document.cookie = `postadmin-auth=true; path=/; max-age=86400; SameSite=Lax`;
             } else {
+              // Not authenticated, clear cookie
               document.cookie = `postadmin-auth=; path=/; max-age=0; SameSite=Lax`;
             }
           } catch {

@@ -58,7 +58,7 @@ export const useTableSchemaStore = create<TableSchemaState>()(
         set({ schemas: {} });
         // Trigger auto-export after state update
         if (typeof window !== 'undefined') {
-          setTimeout(() => autoExportSettings(), 100);
+          setTimeout(() => trackSettingsChange(), 100);
         }
       },
     }),

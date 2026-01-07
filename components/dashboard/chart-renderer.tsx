@@ -330,7 +330,6 @@ export function ChartRenderer({ chart, data, error }: ChartRendererProps) {
           >
             <RadialBar
               dataKey={yAxisKey}
-              nameKey={xAxisKey}
               fill={CHART_COLORS[0] || DEFAULT_COLORS[0]}
             />
             <ChartTooltip content={<ChartTooltipContent />} />

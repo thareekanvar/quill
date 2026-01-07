@@ -118,6 +118,7 @@ export async function importSettings(
     authState: boolean;
     tableSchemas: boolean;
     connections: number;
+    dashboards: number;
     dashboardCards: number;
     dashboardCharts: number;
   };
@@ -136,6 +137,7 @@ export async function importSettings(
   const errors: string[] = [];
   const imported = {
     sidebarPreferences: false,
+    authState: false,
     tableSchemas: false,
     connections: 0,
     dashboards: 0,
@@ -433,6 +435,10 @@ export async function hasSettingsChangedSinceDownload(): Promise<boolean> {
     }
     
     if (!lastChange) {
+      return false;
+    }
+    
+    if (!lastDownload) {
       return false;
     }
     

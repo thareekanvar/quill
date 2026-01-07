@@ -272,6 +272,7 @@
     "tables": "Tables",
     "refreshTables": "Refresh tables",
     "dashboard": "Dashboard",
+    "aiAssistant": "AI Assistant",
     "sqlConsole": "SQL Console",
     "schemaManagement": "Schema Management",
     "queryHistory": "Query History",
@@ -340,7 +341,8 @@
     "globalSearchSchemaManagement": "Database schema management",
     "globalSearchSavedQueries": "Saved queries",
     "globalSearchDatabaseTable": "Database table",
-    "globalSearchQueries": "Queries"
+    "globalSearchQueries": "Queries",
+    "aiAssistant": "AI Assistant"
   },
   "filters": {
     "addFilter": "Add Filter",
@@ -508,5 +510,21 @@
     "columnModifiedSuccess": "Column modified successfully",
     "noChanges": "No changes detected",
     "options": "Options"
+  },
+  "aiChat": {
+    "title": "AI Assistant",
+    "description": "Ask questions about your database in natural language. I can help you write SQL queries, explore data, and understand your schema.",
+    "chatTitle": "Chat with AI",
+    "chatDescription": "Describe what you want to do with your database",
+    "emptyStateTitle": "Start a conversation",
+    "emptyStateDescription": "Try asking: \"Show me all users\" or \"What tables are in my database?\"",
+    "executingQuery": "Executing SQL Query",
+    "queryResult": "SQL Query Result",
+    "thinking": "Thinking...",
+    "error": "Error",
+    "somethingWentWrong": "Something went wrong",
+    "placeholder": "Ask a question about your database...",
+    "connectFirst": "Please connect to a database first",
+    "failedToSendMessage": "Failed to send message"
   }
 }

@@ -33,7 +33,7 @@ export function useSearchData() {
         description: t.sidebar.globalSearchSchemaManagement,
       },
       {
-        title: t.sidebar.globalSearchQueries,
+        title: t.sidebar.globalSearchSavedQueries,
         url: "/dashboard/queries",
         icon: Terminal,
         category: "routes" as const,

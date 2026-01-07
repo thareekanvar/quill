@@ -10,6 +10,7 @@ import {
   MagnifyingGlass,
   Terminal,
   Table,
+  Sparkle,
 } from "@phosphor-icons/react";
 import { useSidebarStore } from "@/lib/stores/sidebar-store";
 import { useTables } from "@/hooks/use-postgres-query";
@@ -130,6 +131,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     router.push("/dashboard/schema");
   };
 
+  const handleAIChatClick = () => {
+    setSelectedTable(null);
+    router.push("/dashboard/ai-chat");
+  };
+
   const handleSearchClick = () => {
     setSearchOpen(true);
   };
@@ -140,6 +146,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       url: "/dashboard",
       icon: Database,
       onClick: handleDashboardClick,
+    },
+    {
+      title: t.sidebar.aiAssistant,
+      url: "/dashboard/ai-chat",
+      icon: Sparkle,
+      onClick: handleAIChatClick,
     },
     {
       title: t.sidebar.sqlConsole,

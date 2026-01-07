@@ -83,7 +83,7 @@ interface PostAdminDB extends DBSchema {
   queries: {
     key: string;
     value: SavedQuery;
-    indexes: { 'by-connection': string; 'by-executed': number; 'by-saved': boolean };
+    indexes: { 'by-connection': string; 'by-executed': number };
   };
 }
 
@@ -184,7 +184,6 @@ export async function getDB(): Promise<IDBPDatabase<PostAdminDB>> {
         const queriesStore = db.createObjectStore(QUERIES_STORE_NAME, { keyPath: 'id' });
         queriesStore.createIndex('by-connection', 'connectionId');
         queriesStore.createIndex('by-executed', 'executedAt');
-        queriesStore.createIndex('by-saved', 'isSaved');
       }
     },
     async blocked() {
@@ -720,9 +719,9 @@ export async function exportConnectionDecrypted(
     url: string;
     createdAt: number;
   };
-  dashboards: Omit<Dashboard, 'id' | 'createdAt' | 'updatedAt'>[];
-  cards: Omit<DashboardCard, 'id' | 'createdAt' | 'updatedAt'>[];
-  charts: Omit<DashboardChart, 'id' | 'createdAt' | 'updatedAt'>[];
+  dashboards: Omit<Dashboard, 'id' | 'createdAt' | 'updatedAt' | 'connectionId'>[];
+  cards: Omit<DashboardCard, 'id' | 'createdAt' | 'updatedAt' | 'connectionId' | 'dashboardId'>[];
+  charts: Omit<DashboardChart, 'id' | 'createdAt' | 'updatedAt' | 'connectionId' | 'dashboardId'>[];
 }> {
   const db = await getDB();
   const connection = await db.get(STORE_NAME, connectionId);
@@ -751,7 +750,7 @@ export async function exportConnectionDecrypted(
       url: decryptedUrl,
       createdAt: connection.createdAt,
     },
-    dashboards: dashboards.sort((a, b) => b.createdAt - a.createdAt).map(({ id, createdAt, updatedAt, connectionId: _, ...rest }) => rest),
+    dashboards: dashboards.sort((a, b) => b.createdAt - a.createdAt).map(({ id, createdAt, updatedAt, ...rest }) => rest),
     cards: cards.sort((a, b) => a.order - b.order).map(({ id, createdAt, updatedAt, connectionId: _, ...rest }) => rest),
     charts: charts.sort((a, b) => a.order - b.order).map(({ id, createdAt, updatedAt, connectionId: _, ...rest }) => rest),
   };

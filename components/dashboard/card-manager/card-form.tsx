@@ -16,7 +16,7 @@ import { Field, FieldGroup } from "@/components/ui/field";
 import { Button } from "@/components/ui/button";
 import { SheetFooter } from "@/components/ui/sheet";
 import { useTableColumns } from "@/hooks/use-table-columns";
-import type { CardFormProps } from "./types";
+import type { CardFormProps, CardFormData } from "./types";
 import { filterDateColumns, filterColumnsByQueryType } from "./helpers/column-filters";
 import { getDefaultFormValues, cardToFormData } from "./utils/form-defaults";
 import { QUERY_TYPE_LABELS, AGGREGATE_LABELS, VALUE_COLUMN_NAMES } from "./constants";
@@ -46,7 +46,7 @@ export function CardForm({
   
   // Fetch columns when table is selected
   const { data: columnsData } = useTableColumns(
-    queryType === "table" ? tableName : undefined,
+    queryType !== "custom" ? tableName : undefined,
     schemaName
   );
   
@@ -147,7 +147,7 @@ export function CardForm({
           )}
         </Field>
 
-        {queryType === "table" ? (
+        {queryType !== "custom" ? (
           <>
             <Field>
               <Label htmlFor="schemaName">Schema</Label>
@@ -164,8 +164,7 @@ export function CardForm({
                 name="tableName"
                 control={control}
                 rules={{
-                  required:
-                    queryType !== "custom" ? "Table is required" : false,
+                  required: "Table is required",
                 }}
                 render={({ field }) => (
                   <Select
@@ -353,7 +352,7 @@ export function CardForm({
           <p className="text-xs text-muted-foreground mt-1">
             Column name to use for date range filtering (optional). Must be a
             date/timestamp column.
-            {queryType === "table" && dateColumns.length === 0 && columns.length > 0 && (
+            {queryType !== "custom" && dateColumns.length === 0 && columns.length > 0 && (
               <span className="text-destructive"> No date columns found in this table.</span>
             )}
           </p>

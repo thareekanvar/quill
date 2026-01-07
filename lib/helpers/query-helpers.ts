@@ -4,8 +4,12 @@
 
 /**
  * Check if a query is a mutation (UPDATE, INSERT, DELETE, etc.)
+ * This includes all write/modification operations that should be blocked
  */
 export function isMutation(query: string): boolean {
+  if (!query || typeof query !== 'string') {
+    return false;
+  }
   const trimmedQuery = query.trim().toUpperCase();
   return (
     trimmedQuery.startsWith('UPDATE') ||
@@ -14,7 +18,16 @@ export function isMutation(query: string): boolean {
     trimmedQuery.startsWith('ALTER') ||
     trimmedQuery.startsWith('DROP') ||
     trimmedQuery.startsWith('CREATE') ||
-    trimmedQuery.startsWith('TRUNCATE')
+    trimmedQuery.startsWith('TRUNCATE') ||
+    trimmedQuery.startsWith('GRANT') ||
+    trimmedQuery.startsWith('REVOKE') ||
+    trimmedQuery.startsWith('COMMENT') ||
+    trimmedQuery.startsWith('REINDEX') ||
+    trimmedQuery.startsWith('VACUUM') ||
+    trimmedQuery.startsWith('ANALYZE') ||
+    trimmedQuery.startsWith('REPLACE') ||
+    trimmedQuery.startsWith('MERGE') ||
+    trimmedQuery.startsWith('COPY')
   );
 }
 

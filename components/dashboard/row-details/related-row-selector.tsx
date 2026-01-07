@@ -92,7 +92,7 @@ export function RelatedRowSelector({
     const tableName = tableData.tableName;
     const schemaName = tableData.schemaName;
 
-    router.push(buildRowDetailsUrl(tableName, primaryKeyValue, schemaName));
+    router.push(buildRowDetailsUrl(tableName, String(primaryKeyValue), schemaName));
     onOpenChange(false);
   };
 
@@ -205,13 +205,13 @@ export function RelatedRowSelector({
                           {pkValue !== null && (
                             <div className="font-medium text-sm mb-1 truncate">
                               <span className="text-muted-foreground">ID:</span>{" "}
-                              {formatCellValue(pkValue, tableData.schema.find(c => c.columnName === primaryKey)?.dataType)}
+                              {formatCellValue(pkValue, tableData?.schema.find(c => c.columnName === primaryKey)?.dataType)}
                             </div>
                           )}
                           {previewColumns.length > 0 && (
                             <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
                               {previewColumns.map((column) => {
-                                const columnSchema = tableData.schema.find(
+                                const columnSchema = tableData?.schema.find(
                                   (col) => col.columnName === column
                                 );
                                 const dataType = columnSchema?.dataType;

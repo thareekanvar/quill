@@ -36,7 +36,7 @@ export const useSidebarPreferencesStore = create<SidebarPreferencesState>()(
         if (hasChanges) {
           set({ preferences: newPreferences });
           if (typeof window !== 'undefined') {
-            setTimeout(() => autoExportSettings(), 100);
+            setTimeout(() => trackSettingsChange(), 100);
           }
         }
       },
@@ -105,7 +105,7 @@ export const useSidebarPreferencesStore = create<SidebarPreferencesState>()(
         set({ preferences: {} });
         // Trigger auto-export after state update
         if (typeof window !== 'undefined') {
-          setTimeout(() => autoExportSettings(), 100);
+          setTimeout(() => trackSettingsChange(), 100);
         }
       },
       

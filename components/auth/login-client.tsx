@@ -3,12 +3,22 @@
 import { LoginForm } from "@/components/auth/login-form";
 import { useAuthStore } from "@/lib/stores/auth-store";
 import { useTranslation } from "@/contexts/translation-context";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export function LoginPageClient() {
   const { t } = useTranslation();
-  const { isAuthenticated, _hasHydrated } = useAuthStore();
+  const { isAuthenticated, connectionId, password, _hasHydrated, logout } = useAuthStore();
+  const router = useRouter();
 
-  // Show loading state while checking auth (proxy will handle redirects)
+  // If authenticated but missing password or connectionId, logout
+  useEffect(() => {
+    if (_hasHydrated && isAuthenticated && (!connectionId || !password)) {
+      logout();
+    }
+  }, [_hasHydrated, isAuthenticated, connectionId, password, logout]);
+
+  // Show loading state while checking auth
   if (!_hasHydrated) {
     return (
       <div className="flex min-h-screen items-center justify-center">
@@ -20,8 +30,8 @@ export function LoginPageClient() {
     );
   }
 
-  // Don't show login form if already authenticated (proxy will redirect)
-  if (isAuthenticated) {
+  // If fully authenticated, redirect to dashboard (proxy will handle this, but show loading)
+  if (isAuthenticated && connectionId && password) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">

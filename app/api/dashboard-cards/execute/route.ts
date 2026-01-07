@@ -162,14 +162,16 @@ export async function POST(request: NextRequest) {
               if (previousResult && previousResult.length > 0) {
                 const prevRow = previousResult[0];
                 if (card.valueColumn && prevRow[card.valueColumn] !== undefined) {
-                  previousValue = typeof prevRow[card.valueColumn] === 'number' 
-                    ? prevRow[card.valueColumn] 
-                    : parseFloat(String(prevRow[card.valueColumn])) || 0;
+                  const value = prevRow[card.valueColumn];
+                  previousValue = typeof value === 'number' 
+                    ? value 
+                    : parseFloat(String(value)) || 0;
                 } else if (Object.keys(prevRow).length > 0) {
                   const firstKey = Object.keys(prevRow)[0];
-                  previousValue = typeof prevRow[firstKey] === 'number'
-                    ? prevRow[firstKey]
-                    : parseFloat(String(prevRow[firstKey])) || 0;
+                  const value = prevRow[firstKey];
+                  previousValue = typeof value === 'number'
+                    ? value
+                    : parseFloat(String(value)) || 0;
                 }
               }
             } catch (error) {
@@ -187,12 +189,14 @@ export async function POST(request: NextRequest) {
             
             // Extract main value
             if (card.valueColumn && firstRow[card.valueColumn] !== undefined) {
-              value = firstRow[card.valueColumn];
-              currentNumericValue = typeof value === 'number' ? value : parseFloat(String(value)) || null;
+              const rowValue = firstRow[card.valueColumn];
+              value = typeof rowValue === 'number' || typeof rowValue === 'string' ? rowValue : String(rowValue);
+              currentNumericValue = typeof rowValue === 'number' ? rowValue : parseFloat(String(rowValue)) || null;
             } else if (Object.keys(firstRow).length > 0) {
               const firstKey = Object.keys(firstRow)[0];
-              value = firstRow[firstKey];
-              currentNumericValue = typeof value === 'number' ? value : parseFloat(String(value)) || null;
+              const rowValue = firstRow[firstKey];
+              value = typeof rowValue === 'number' || typeof rowValue === 'string' ? rowValue : String(rowValue);
+              currentNumericValue = typeof rowValue === 'number' ? rowValue : parseFloat(String(rowValue)) || null;
             }
           }
           

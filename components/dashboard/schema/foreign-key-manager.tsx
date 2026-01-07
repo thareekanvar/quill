@@ -36,7 +36,7 @@ interface ForeignKeyManagerProps {
 
 export function ForeignKeyManager({ selectedTable, onTableSelect }: ForeignKeyManagerProps) {
   const { t } = useTranslation();
-  const { connectionId } = useAuthStore();
+  const { connectionId, password } = useAuthStore();
   const { data: tablesData } = useTables();
   const createForeignKeyMutation = useCreateForeignKey();
   const deleteForeignKeyMutation = useDeleteForeignKey();
@@ -94,8 +94,8 @@ export function ForeignKeyManager({ selectedTable, onTableSelect }: ForeignKeyMa
     setPasswordModalOpen(true);
   };
 
-  const handlePasswordConfirm = async (confirmedPassword: string) => {
-    if (!connectionId || !selectedTable) {
+  const handlePasswordConfirm = async () => {
+    if (!connectionId || !password || !selectedTable) {
       toast.error(t.schema.noConnection);
       return;
     }
@@ -106,7 +106,7 @@ export function ForeignKeyManager({ selectedTable, onTableSelect }: ForeignKeyMa
           schemaName: selectedTable.schemaName,
           tableName: selectedTable.tableName,
           foreignKey: pendingAction.data,
-          password: confirmedPassword,
+          password: password,
         });
 
         toast.success(t.schema.foreignKeyCreatedSuccess);
@@ -125,7 +125,7 @@ export function ForeignKeyManager({ selectedTable, onTableSelect }: ForeignKeyMa
         await deleteForeignKeyMutation.mutateAsync({
           schemaName: selectedTable.schemaName,
           constraintName: pendingAction.data.constraintName,
-          password: confirmedPassword,
+          password: password,
         });
 
         toast.success(t.schema.foreignKeyDeletedSuccess);

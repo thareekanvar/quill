@@ -64,6 +64,7 @@ export function useTables() {
  */
 export function useTableData(params: TableDataParams) {
   const { connectionId, password } = useAuthStore();
+  const queryClient = useQueryClient();
   const {
     tableName,
     schemaName = DEFAULT_SCHEMA,

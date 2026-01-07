@@ -270,7 +270,7 @@ export function RowDetails({
                       disabled={isSaving}
                     >
                       <Download className="size-4 mr-2" />
-                      {t.table.export}
+                      {t.table["export"]}
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">

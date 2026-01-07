@@ -100,9 +100,10 @@ export function SelectFilterComponent({
               {val}
               <button
                 onClick={() => {
+                  const currentValue = Array.isArray(filter.value) ? filter.value : filter.value ? [filter.value] : [];
                   onChange({
                     ...filter,
-                    value: filter.value.filter((v) => v !== val),
+                    value: currentValue.filter((v) => v !== val),
                   });
                 }}
                 className="hover:text-destructive"

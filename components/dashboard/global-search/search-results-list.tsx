@@ -11,7 +11,7 @@ interface SearchResultsListProps {
   searchQuery: string;
   onItemSelect: (item: SearchItem) => void;
   onItemHover: (index: number) => void;
-  listRef?: React.RefObject<HTMLDivElement>;
+  listRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 export function SearchResultsList({

@@ -263,6 +263,9 @@
     "tables": "Tabellen",
     "refreshTables": "Tabellen aktualisieren",
     "dashboard": "Dashboard",
+    "aiAssistant": "KI-Assistent",
+    "sqlConsole": "SQL-Konsole",
+    "schemaManagement": "Schema-Verwaltung",
     "getHelp": "Hilfe erhalten",
     "search": "Suchen",
     "logout": "Abmelden",
@@ -328,7 +331,8 @@
     "globalSearchSchemaManagement": "Datenbankschema-Verwaltung",
     "globalSearchSavedQueries": "Gespeicherte Abfragen",
     "globalSearchDatabaseTable": "Datenbanktabelle",
-    "globalSearchQueries": "Abfragen"
+    "globalSearchQueries": "Abfragen",
+    "aiAssistant": "KI-Assistent"
   },
   "filters": {
     "addFilter": "Filter hinzufügen",
@@ -425,5 +429,21 @@
     "seriesColumnPlaceholder": "Region, Produkt, etc.",
     "deleteChart": "Diagramm löschen",
     "deleteChartDescription": "Sind Sie sicher, dass Sie dieses Diagramm löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
+  },
+  "aiChat": {
+    "title": "KI-Assistent",
+    "description": "Stellen Sie Fragen zu Ihrer Datenbank in natürlicher Sprache. Ich kann Ihnen beim Schreiben von SQL-Abfragen helfen, Daten erkunden und Ihr Schema verstehen.",
+    "chatTitle": "Mit KI chatten",
+    "chatDescription": "Beschreiben Sie, was Sie mit Ihrer Datenbank tun möchten",
+    "emptyStateTitle": "Gespräch beginnen",
+    "emptyStateDescription": "Versuchen Sie zu fragen: \"Zeigen Sie mir alle Benutzer\" oder \"Welche Tabellen sind in meiner Datenbank?\"",
+    "executingQuery": "SQL-Abfrage wird ausgeführt",
+    "queryResult": "SQL-Abfrageergebnis",
+    "thinking": "Denken...",
+    "error": "Fehler",
+    "somethingWentWrong": "Etwas ist schief gelaufen",
+    "placeholder": "Stellen Sie eine Frage zu Ihrer Datenbank...",
+    "connectFirst": "Bitte verbinden Sie sich zuerst mit einer Datenbank",
+    "failedToSendMessage": "Nachricht konnte nicht gesendet werden"
   }
 }

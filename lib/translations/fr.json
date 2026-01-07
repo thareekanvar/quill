@@ -263,6 +263,9 @@
     "tables": "Tableaux",
     "refreshTables": "Actualiser les tableaux",
     "dashboard": "Tableau de bord",
+    "aiAssistant": "Assistant IA",
+    "sqlConsole": "Console SQL",
+    "schemaManagement": "Gestion des schémas",
     "getHelp": "Obtenir de l'aide",
     "search": "Rechercher",
     "logout": "Se déconnecter",
@@ -328,7 +331,8 @@
     "globalSearchSchemaManagement": "Gestion du schéma de base de données",
     "globalSearchSavedQueries": "Requêtes enregistrées",
     "globalSearchDatabaseTable": "Table de base de données",
-    "globalSearchQueries": "Requêtes"
+    "globalSearchQueries": "Requêtes",
+    "aiAssistant": "Assistant IA"
   },
   "filters": {
     "addFilter": "Ajouter un filtre",
@@ -425,5 +429,21 @@
     "seriesColumnPlaceholder": "région, produit, etc.",
     "deleteChart": "Supprimer le graphique",
     "deleteChartDescription": "Êtes-vous sûr de vouloir supprimer ce graphique ? Cette action ne peut pas être annulée."
+  },
+  "aiChat": {
+    "title": "Assistant IA",
+    "description": "Posez des questions sur votre base de données en langage naturel. Je peux vous aider à écrire des requêtes SQL, explorer les données et comprendre votre schéma.",
+    "chatTitle": "Discuter avec l'IA",
+    "chatDescription": "Décrivez ce que vous voulez faire avec votre base de données",
+    "emptyStateTitle": "Commencer une conversation",
+    "emptyStateDescription": "Essayez de demander : \"Montrez-moi tous les utilisateurs\" ou \"Quelles tables sont dans ma base de données ?\"",
+    "executingQuery": "Exécution de la requête SQL",
+    "queryResult": "Résultat de la requête SQL",
+    "thinking": "Réflexion...",
+    "error": "Erreur",
+    "somethingWentWrong": "Quelque chose s'est mal passé",
+    "placeholder": "Posez une question sur votre base de données...",
+    "connectFirst": "Veuillez d'abord vous connecter à une base de données",
+    "failedToSendMessage": "Échec de l'envoi du message"
   }
 }

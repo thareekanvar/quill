@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/dialog";
 import { DEFAULT_SCHEMA } from "@/lib/constants";
 import { TableSkeleton } from "./table-skeleton";
+import type { TableColumn } from "@/types/table";
 
 interface ColumnManagerProps {
   selectedTable: { tableName: string; schemaName: string } | null;
@@ -66,7 +67,7 @@ interface EditColumnFormData {
 
 export function ColumnManager({ selectedTable, onTableSelect }: ColumnManagerProps) {
   const { t } = useTranslation();
-  const { connectionId } = useAuthStore();
+  const { connectionId, password } = useAuthStore();
   const { data: tablesData } = useTables();
   const deleteColumnMutation = useDeleteColumn();
   const modifyColumnMutation = useModifyColumn();
@@ -106,7 +107,7 @@ export function ColumnManager({ selectedTable, onTableSelect }: ColumnManagerPro
   };
 
   const handleModifyColumn = (columnName: string) => {
-    const column = columns.find((col) => col.columnName === columnName);
+    const column = columns.find((col: TableColumn) => col.columnName === columnName);
     if (!column) return;
 
     // Extract base type (e.g., "VARCHAR(255)" -> "VARCHAR")
@@ -163,8 +164,8 @@ export function ColumnManager({ selectedTable, onTableSelect }: ColumnManagerPro
     setPasswordModalOpen(true);
   };
 
-  const handlePasswordConfirm = async (confirmedPassword: string) => {
-    if (!connectionId || !selectedTable) {
+  const handlePasswordConfirm = async () => {
+    if (!connectionId || !password || !selectedTable) {
       toast.error(t.schema.noConnection);
       return;
     }
@@ -181,7 +182,7 @@ export function ColumnManager({ selectedTable, onTableSelect }: ColumnManagerPro
           tableName: selectedTable.tableName,
           columnName: pendingAction.data.columnName,
           changes: pendingAction.data.changes,
-          password: confirmedPassword,
+          password: password,
         });
 
         toast.success(t.schema.columnModifiedSuccess);
@@ -193,7 +194,7 @@ export function ColumnManager({ selectedTable, onTableSelect }: ColumnManagerPro
           schemaName: selectedTable.schemaName,
           tableName: selectedTable.tableName,
           columnName: pendingAction.data.columnName,
-          password: confirmedPassword,
+          password: password,
         });
 
         toast.success(t.schema.columnDeletedSuccess);
@@ -280,7 +281,7 @@ export function ColumnManager({ selectedTable, onTableSelect }: ColumnManagerPro
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {columns.map((column) => (
+                {columns.map((column: TableColumn) => (
                   <TableRow key={column.columnName}>
                     <TableCell>{column.columnName}</TableCell>
                     <TableCell>{column.dataType}</TableCell>

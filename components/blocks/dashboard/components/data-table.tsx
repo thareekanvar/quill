@@ -24,8 +24,6 @@ import {
   CaretDown,
   CaretLeft,
   CaretRight,
-  CaretsLeft,
-  CaretsRight,
   CheckCircle,
   DotsThreeVertical,
   DotsSixVertical,
@@ -572,7 +570,7 @@ export function DataTable({
                 disabled={!table.getCanPreviousPage()}
               >
                 <span className="sr-only">Go to first page</span>
-                <CaretsLeft />
+                <CaretLeft />
               </Button>
               <Button
                 variant="outline"
@@ -602,7 +600,7 @@ export function DataTable({
                 disabled={!table.getCanNextPage()}
               >
                 <span className="sr-only">Go to last page</span>
-                <CaretsRight />
+                <CaretRight />
               </Button>
             </div>
           </div>

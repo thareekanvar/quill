@@ -7,6 +7,8 @@ import { AppSidebar } from "@/components/blocks/dashboard/components/app-sidebar
 import { SiteHeader } from "@/components/blocks/dashboard/components/site-header";
 import { SettingsBanner } from "@/components/dashboard/settings-banner";
 import { useTranslation } from "@/contexts/translation-context";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,11 +24,21 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isAuthenticated, connectionId, password, _hasHydrated } =
+  const { isAuthenticated, connectionId, password, _hasHydrated, logout } =
     useAuthStore();
   const { t } = useTranslation();
+  const router = useRouter();
 
-  // Show loading state while hydrating (proxy handles redirects)
+  // If not authenticated after hydration, logout and redirect
+  useEffect(() => {
+    if (_hasHydrated && (!isAuthenticated || !connectionId || !password)) {
+      logout().then(() => {
+        router.push('/login');
+      });
+    }
+  }, [_hasHydrated, isAuthenticated, connectionId, password, logout, router]);
+
+  // Show loading state while hydrating
   if (!_hasHydrated) {
     return (
       <div className="flex min-h-screen items-center justify-center">
@@ -40,7 +52,7 @@ export default function DashboardLayout({
     );
   }
 
-  // If not authenticated, show loading (proxy will redirect)
+  // If not authenticated, show loading while redirecting
   if (!isAuthenticated || !connectionId || !password) {
     return (
       <div className="flex min-h-screen items-center justify-center">

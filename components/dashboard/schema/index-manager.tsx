@@ -38,7 +38,7 @@ interface IndexManagerProps {
 
 export function IndexManager({ selectedTable, onTableSelect }: IndexManagerProps) {
   const { t } = useTranslation();
-  const { connectionId } = useAuthStore();
+  const { connectionId, password } = useAuthStore();
   const { data: tablesData } = useTables();
   const createIndexMutation = useCreateIndex();
   const deleteIndexMutation = useDeleteIndex();
@@ -87,8 +87,8 @@ export function IndexManager({ selectedTable, onTableSelect }: IndexManagerProps
     setPasswordModalOpen(true);
   };
 
-  const handlePasswordConfirm = async (confirmedPassword: string) => {
-    if (!connectionId || !selectedTable) {
+  const handlePasswordConfirm = async () => {
+    if (!connectionId || !password || !selectedTable) {
       toast.error(t.schema.noConnection);
       return;
     }
@@ -99,7 +99,7 @@ export function IndexManager({ selectedTable, onTableSelect }: IndexManagerProps
           schemaName: selectedTable.schemaName,
           tableName: selectedTable.tableName,
           index: pendingAction.data,
-          password: confirmedPassword,
+          password: password,
         });
 
         toast.success(t.schema.indexCreatedSuccess);
@@ -111,7 +111,7 @@ export function IndexManager({ selectedTable, onTableSelect }: IndexManagerProps
         await deleteIndexMutation.mutateAsync({
           schemaName: selectedTable.schemaName,
           indexName: pendingAction.data.indexName,
-          password: confirmedPassword,
+          password: password,
         });
 
         toast.success(t.schema.indexDeletedSuccess);

@@ -60,7 +60,7 @@ export function generateChartQuery(data: ChartFormData): QueryGenerationResult {
  */
 export function formDataToChartData(
   data: ChartFormData
-): Omit<DashboardChart, "id" | "createdAt" | "updatedAt" | "order"> & {
+): Omit<DashboardChart, "id" | "createdAt" | "updatedAt" | "order" | "connectionId" | "dashboardId"> & {
   order?: number;
 } {
   const { query, xAxisColumn, yAxisColumn, seriesColumn } = generateChartQuery(data);

@@ -21,9 +21,9 @@ import type { CreateTableParams } from "@/lib/helpers/schema-helpers";
 const columnSchema = z.object({
   name: z.string().min(1, "Column name is required"),
   type: z.string().min(1, "Column type is required"),
-  nullable: z.boolean().default(true),
+  nullable: z.boolean(),
   defaultValue: z.string().optional(),
-  primaryKey: z.boolean().default(false),
+  primaryKey: z.boolean(),
 });
 
 const createTableSchema = z.object({
@@ -61,7 +61,7 @@ const POSTGRES_DATA_TYPES = [
 
 export function CreateTableForm({ onTableCreated }: CreateTableFormProps) {
   const { t } = useTranslation();
-  const { connectionId } = useAuthStore();
+  const { connectionId, password } = useAuthStore();
   const createTableMutation = useCreateTable();
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
 
@@ -104,8 +104,8 @@ export function CreateTableForm({ onTableCreated }: CreateTableFormProps) {
     setPasswordModalOpen(true);
   };
 
-  const handlePasswordConfirm = async (confirmedPassword: string) => {
-    if (!connectionId) {
+  const handlePasswordConfirm = async () => {
+    if (!connectionId || !password) {
       toast.error(t.schema.noConnection);
       return;
     }
@@ -128,7 +128,7 @@ export function CreateTableForm({ onTableCreated }: CreateTableFormProps) {
 
       await createTableMutation.mutateAsync({
         ...params,
-        password: confirmedPassword,
+        password: password,
       });
 
       toast.success(t.schema.tableCreatedSuccess);

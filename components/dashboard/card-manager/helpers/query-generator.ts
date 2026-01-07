@@ -82,7 +82,7 @@ export function generateQuery(data: CardFormData): QueryGenerationResult {
  */
 export function formDataToCardData(
   data: CardFormData
-): Omit<DashboardCard, "id" | "createdAt" | "updatedAt" | "order"> & {
+): Omit<DashboardCard, "id" | "createdAt" | "updatedAt" | "order" | "connectionId" | "dashboardId"> & {
   order?: number;
 } {
   const { query, valueColumn } = generateQuery(data);

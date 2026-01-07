@@ -1,4 +1,5 @@
 import * as React from "react";
+import { startOfDay, endOfDay } from "date-fns";
 import { AppSidebar } from "@/components/blocks/dashboard/components/app-sidebar";
 import { ChartAreaInteractive } from "@/components/blocks/dashboard/components/chart-area-interactive";
 import { DataTable } from "@/components/blocks/dashboard/components/data-table";
@@ -9,6 +10,12 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import data from "./data.json";
 
 export default function Page() {
+  const now = new Date();
+  const dateRange = {
+    from: startOfDay(now),
+    to: endOfDay(now),
+  };
+
   return (
     <SidebarProvider
       style={
@@ -24,7 +31,7 @@ export default function Page() {
         <div className="flex flex-1 flex-col">
           <div className="@container/main flex flex-1 flex-col gap-2">
             <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              <SectionCards />
+              <SectionCards dateRange={dateRange} />
               <div className="px-4 lg:px-6">
                 <ChartAreaInteractive />
               </div>

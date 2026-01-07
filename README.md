@@ -17,6 +17,7 @@ Built with [Next.js](https://nextjs.org), React, and TypeScript.
 - **Data Operations** - Create, read, update, and delete records with password-protected mutations
 - **SQL Console** - Execute custom SQL queries with syntax highlighting, query history, and transaction support
 - **Schema Management** - View and manage database schemas, create tables, and modify structure
+- **AI Assistant** - Chat with AI to generate SQL queries, explore data, and understand your database schema using natural language
 
 ### Advanced Features
 
@@ -35,6 +36,7 @@ Built with [Next.js](https://nextjs.org), React, and TypeScript.
 - Node.js 18+
 - PostgreSQL database
 - pnpm (recommended)
+- Google AI API key (for AI chat feature) - Get one from [Google AI Studio](https://aistudio.google.com/apikey)
 
 ### Installation
 
@@ -51,13 +53,22 @@ Built with [Next.js](https://nextjs.org), React, and TypeScript.
    pnpm install
    ```
 
-3. Run the development server:
+3. Set up environment variables:
+
+   Create a `.env.local` file in the root directory:
+   ```bash
+   GOOGLE_GENERATIVE_AI_API_KEY=your_google_ai_api_key_here
+   ```
+   
+   **Note:** The AI chat feature requires a Google AI API key. You can get one from [Google AI Studio](https://aistudio.google.com/apikey).
+
+4. Run the development server:
 
    ```bash
    pnpm dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) and connect to your PostgreSQL database.
+5. Open [http://localhost:3000](http://localhost:3000) and connect to your PostgreSQL database.
 
 Your connection details are encrypted and stored locally in your browser.
 

@@ -53,27 +53,27 @@ export interface TextFilter extends BaseFilter {
 export interface NumberFilter extends BaseFilter {
   type: "number";
   operator: "equals" | "notEquals" | "greaterThan" | "greaterThanOrEqual" | "lessThan" | "lessThanOrEqual";
-  value: number;
+  value?: number;
 }
 
 export interface RangeFilter extends BaseFilter {
   type: "range";
   operator: "between";
-  value: number; // min
-  value2: number; // max
+  value?: number; // min
+  value2?: number; // max
 }
 
 export interface DateFilter extends BaseFilter {
   type: "date";
   operator: "equals" | "notEquals" | "before" | "after" | "on" | "isNull" | "isNotNull";
-  value: string | Date; // ISO date string or Date object
+  value?: string | Date; // ISO date string or Date object
 }
 
 export interface DateRangeFilter extends BaseFilter {
   type: "dateRange";
   operator: "between";
-  value: string | Date; // start date
-  value2: string | Date; // end date
+  value?: string | Date; // start date
+  value2?: string | Date; // end date
 }
 
 export interface BooleanFilter extends BaseFilter {
@@ -85,7 +85,7 @@ export interface BooleanFilter extends BaseFilter {
 export interface SelectFilter extends BaseFilter {
   type: "select";
   operator: "equals" | "notEquals" | "in" | "notIn";
-  value: string | string[];
+  value?: string | string[];
 }
 
 export interface MultiSelectFilter extends BaseFilter {
