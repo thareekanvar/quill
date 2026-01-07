@@ -1,5 +1,8 @@
 name = "quill"
-compatibility_date = "2024-12-27"
+compatibility_date = "2026-01-07"
 compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = ".opennext"
+main = ".opennext/worker.js"
+[assets]
+directory = ".opennext/assets"
+binding = "ASSETS"
 
