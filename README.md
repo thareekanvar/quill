@@ -43,7 +43,7 @@ Deploy this project to your favorite platform with one click:
 <a href="https://app.netlify.com/start/deploy?repository=https://github.com/thareekanvar/quill" target="_blank" rel="noopener noreferrer">
   <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />
 </a>
-<a href="https://dash.cloudflare.com/?to=/:account/pages/new/create" target="_blank" rel="noopener noreferrer">
+<a href="https://deploy.workers.cloudflare.com/?url=https://github.com/thareekanvar/quill" target="_blank" rel="noopener noreferrer">
   <img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare Pages" />
 </a>
 
