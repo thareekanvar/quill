@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "pages:build": "npx @cloudflare/next-on-pages",
+    "pages:build": "npx @opennextjs/cloudflare",
     "preview": "pnpm pages:build && wrangler pages dev",
     "deploy": "pnpm pages:build && wrangler pages deploy"
   },
@@ -58,8 +58,8 @@
     "zustand": "^5.0.9"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.15.0",
-    "@netlify/plugin-nextjs": "^4.45.0",
+    "@opennextjs/cloudflare": "^1.0.0",
+    "@netlify/plugin-nextjs": "^5.15.4",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

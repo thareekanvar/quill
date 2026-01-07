@@ -37,15 +37,21 @@ Deploy this project to your favorite platform with one click:
 
 <div align="center">
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/thareekanvar/quill)
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/thareekanvar/quill)
-[![Deploy to Cloudflare Pages](https://deploy.workers.cloudflare.com/button)](https://dash.cloudflare.com/?to=/:account/pages/new/create)
+<a href="https://vercel.com/new/clone?repository-url=https://github.com/thareekanvar/quill" target="_blank" rel="noopener noreferrer">
+  <img src="https://vercel.com/button" alt="Deploy with Vercel" />
+</a>
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/thareekanvar/quill" target="_blank" rel="noopener noreferrer">
+  <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />
+</a>
+<a href="https://dash.cloudflare.com/?to=/:account/pages/new/create" target="_blank" rel="noopener noreferrer">
+  <img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare Pages" />
+</a>
 
 </div>
 
 **Note:** 
 - **Netlify**: Configuration is handled automatically via `netlify.toml`. Make sure to set your environment variables in the Netlify dashboard.
-- **Cloudflare Pages**: After connecting your repository, set the build command to `pnpm pages:build` and output directory to `.vercel/output/static`. Also configure your environment variables in the Cloudflare dashboard.
+- **Cloudflare Pages**: After connecting your repository, set the build command to `pnpm pages:build` and output directory to `.opennext`. Also configure your environment variables in the Cloudflare dashboard. The adapter uses the Node.js runtime (not Edge), providing full Next.js feature support.
 
 ### Prerequisites
 
