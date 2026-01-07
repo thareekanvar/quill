@@ -11,9 +11,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "pages:build": "npx @opennextjs/cloudflare",
-    "preview": "pnpm pages:build && wrangler pages dev",
-    "deploy": "pnpm pages:build && wrangler pages deploy"
+    "pages:build": "npx @opennextjs/cloudflare build",
+    "preview": "pnpm pages:build && npx @opennextjs/cloudflare preview",
+    "deploy": "pnpm pages:build && wrangler pages deploy .opennext"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.3",

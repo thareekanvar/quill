@@ -5,6 +5,16 @@ A modern, web-based PostgreSQL database administration tool. Browse tables, edit
 Built with [Next.js](https://nextjs.org), React, and TypeScript.
 
 <div align="center">
+
+### 🌐 [Live Demo](https://demo-quill.netlify.app/) - Try it now!
+
+<a href="https://demo-quill.netlify.app/" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/badge/🌐_Live_Demo-FF6B6B?style=for-the-badge&logo=netlify" alt="Live Demo" />
+</a>
+
+</div>
+
+<div align="center">
   <img src="public/dashboard.png" alt="Quill Dashboard" />
 </div>
 
