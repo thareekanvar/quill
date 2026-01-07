@@ -6,9 +6,9 @@ Built with [Next.js](https://nextjs.org), React, and TypeScript.
 
 <div align="center">
 
-### 🌐 [Live Demo](https://demo-quill.netlify.app/) - Try it now!
+### 🌐 [Live Demo](http://quill.thareekanvar.com/) - Try it now!
 
-<a href="https://demo-quill.netlify.app/" target="_blank" rel="noopener noreferrer">
+<a href="http://quill.thareekanvar.com/" target="_blank" rel="noopener noreferrer">
   <img src="https://img.shields.io/badge/🌐_Live_Demo-FF6B6B?style=for-the-badge&logo=netlify" alt="Live Demo" />
 </a>
 
@@ -53,15 +53,11 @@ Deploy this project to your favorite platform with one click:
 <a href="https://app.netlify.com/start/deploy?repository=https://github.com/thareekanvar/quill" target="_blank" rel="noopener noreferrer">
   <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify" />
 </a>
-<a href="https://deploy.workers.cloudflare.com/?url=https://github.com/thareekanvar/quill" target="_blank" rel="noopener noreferrer">
-  <img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare Pages" />
-</a>
 
 </div>
 
 **Note:** 
 - **Netlify**: Configuration is handled automatically via `netlify.toml`. Make sure to set your environment variables in the Netlify dashboard.
-- **Cloudflare Pages**: After connecting your repository, set the build command to `pnpm pages:build` and output directory to `.opennext`. Also configure your environment variables in the Cloudflare dashboard. The adapter uses the Node.js runtime (not Edge), providing full Next.js feature support.
 
 ### Prerequisites
 
