@@ -2,7 +2,7 @@
 
 A modern, web-based PostgreSQL database administration tool. Browse tables, edit records, run queries, and manage your database with an intuitive interface. Secure, fast, and easy to use.
 
-Built with [Next.js](https://nextjs.org), React, and TypeScript.
+Built with [Next.js](https://nextjs.org), React, and TypeScript. Uses a client-server architecture where the browser UI communicates with Next.js API routes that proxy connections to PostgreSQL.
 
 <div align="center">
 
@@ -22,7 +22,7 @@ Built with [Next.js](https://nextjs.org), React, and TypeScript.
 
 ### Core Functionality
 
-- **Database Management** - Connect to multiple PostgreSQL databases with encrypted credential storage
+- **Database Management** - Connect to multiple PostgreSQL databases with encrypted local credential storage
 - **Table Browser** - Explore tables, schemas, columns, indexes, and foreign keys
 - **Data Operations** - Create, read, update, and delete records with password-protected mutations
 - **SQL Console** - Execute custom SQL queries with syntax highlighting, query history, and transaction support
@@ -98,7 +98,21 @@ Deploy this project to your favorite platform with one click:
 
 5. Open [http://localhost:3000](http://localhost:3000) and connect to your PostgreSQL database.
 
-Your connection details are encrypted and stored locally in your browser.
+## 🏗️ Architecture
+
+Quill uses a **client-server architecture**:
+
+- **Client-side (Browser)**: 
+  - React UI and user interactions
+  - Encrypted credential storage in IndexedDB (AES encryption)
+  - Local state management and caching
+
+- **Server-side (Next.js API Routes)**:
+  - Acts as a proxy between the browser and PostgreSQL
+  - Executes database queries using the `pg` library
+  - Handles connection pooling and query execution
+
+**Important**: Browsers cannot directly connect to PostgreSQL databases due to protocol and security limitations. The application requires a server component to proxy database connections. Connection strings are sent to the server over HTTPS when executing queries.
 
 ## 📖 Usage
 
@@ -138,9 +152,34 @@ postadmin/
 
 ## 🔒 Security
 
-- Database credentials encrypted with AES and stored locally (IndexedDB)
+### Credential Storage
+- Database credentials are **encrypted with AES-256** and stored locally in your browser's IndexedDB
+- Encryption uses PBKDF2 key derivation (10,000 iterations) for enhanced security
+- Credentials are encrypted using a user-provided password before storage
+
+### Data Transmission
+- Connection strings are sent to the server over **HTTPS** when executing queries
+- The server acts as a proxy and does not log connection strings
+- All API requests use HTTPS encryption in transit
+
+### Security Best Practices
+- **Use HTTPS in production** - Never deploy without SSL/TLS encryption
+- **Self-host for sensitive databases** - For maximum security, deploy on your own infrastructure
+- **Review server logs** - Ensure your deployment doesn't log connection strings
 - All mutation operations require password confirmation
 - Never commit database credentials to version control
+
+### Security Considerations
+⚠️ **Important**: While credentials are encrypted for local storage, they are decrypted and sent to the server when executing database operations. This is necessary because:
+- Browsers cannot directly connect to PostgreSQL (protocol limitations)
+- The server component is required to proxy database connections
+- Connection strings are transmitted over HTTPS but are visible to the server
+
+For production deployments with sensitive data, consider:
+- Self-hosting on your own infrastructure
+- Using a reverse proxy with additional security layers
+- Implementing network-level restrictions
+- Regular security audits of your deployment
 
 ## 📄 License
 
